@@ -1,7 +1,10 @@
-import { Request, Response } from "express"; // Request & Response interfaces
+require('dotenv').config();
 import express from 'express';
+import userRouter from './routes/users';
+import postsRouter from './routes/posts';
+import { Request, Response } from "express";
 
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3333;
 
 // Initialize Express
 const app = express();
@@ -12,6 +15,9 @@ app.get('/', (req: Request, res: Response) => {
         .status(200)
         .send('Basic Structure Set')
 });
+
+app.use('/users', userRouter);
+app.use('/posts', postsRouter);
 
 
 

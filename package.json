@@ -4,14 +4,16 @@
   "description": "provides a simple backend for testing purposes. it'll eventually include endpoints for a complete CRUD functionality plus authentication",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server",
-    "watch-build": "tsc --project ./ --watch",
+    "dev": "nodemon ./dist/server.js",
+    "ts-watch": "tsc --watch",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1"
   },
