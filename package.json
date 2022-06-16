@@ -4,10 +4,9 @@
   "description": "provides a simple backend for testing purposes. it'll eventually include endpoints for a complete CRUD functionality plus authentication",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./dist/server.js",
+    "server": "nodemon ./dist/server.js",
     "ts-watch": "tsc --watch",
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
