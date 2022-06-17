@@ -19,9 +19,13 @@ router.get('/', (req: Request, res: Response) => {
         let parsed = JSON.parse(data.toString());
 
         
-        if(query.length && typeof Number(query.lenght) === 'number') {
+        if(query.page && typeof Number(query.page) === 'number') {
             
-            let paginated = parsed.users.slice(0, Number(query.length));
+            let currentPage = Number(query.page);
+            let previousPage = currentPage > 1? currentPage - 1 : 0;
+            let perPage = typeof Number(query.rows) === 'number' && Number(query.rows) > 0 ? Number(query.rows) : 10;
+
+            let paginated = parsed.users.slice(previousPage * perPage, currentPage * perPage);
             
             return res.status(200).send(paginated)
         }
