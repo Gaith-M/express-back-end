@@ -6,6 +6,9 @@ const router = Router();
 
 router.get('/', (req: Request, res: Response) => {
 
+    let {query} = req;
+    
+
     fs.readFile(`${process.cwd()}/mock-db/users.json`, (err, data) => {
 
         if(err) {
@@ -13,10 +16,19 @@ router.get('/', (req: Request, res: Response) => {
             return res.status(500).send('Something went wrong');
         }
 
-        let parsed = data.toString();
-        res.status(200).send(parsed)
+        let parsed = JSON.parse(data.toString());
+
+        
+        if(query.length && typeof Number(query.lenght) === 'number') {
+            
+            let paginated = parsed.users.slice(0, Number(query.length));
+            
+            return res.status(200).send(paginated)
+        }
+        res.status(200).send(parsed.users)
     })
 })
 
 
 export default router
+
