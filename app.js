@@ -19,6 +19,10 @@ app.use(express.urlencoded({extended: false}));
 // Routes::
 
 
-// -- /api/auth.. contains
-// -- login & signup
+// @Contains
+// login & signup
 app.use('/api/auth', require('./routes/auth'));
+
+// @Contains
+// get single - all - update - delete posts 
+app.use('/api/posts', require('./routes/posts'))

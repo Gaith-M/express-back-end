@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const PostSchema = mongoose.Schema({
+    publicID: Number,
     title: String,
     body: String,
     replys: Array,

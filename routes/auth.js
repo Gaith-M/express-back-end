@@ -40,19 +40,21 @@ router.post('/sign-up',
 });
 
 router.post('/login', 
-    body('email').escape().trim().isEmail().normalizeEmail,
+    body('email').escape().trim().isEmail().normalizeEmail(),
     body('password').escape().trim().isLength({min:8}),
     async (req, res) => {
+
 
         // Validate inputs
         const errors = validationResult(req);
         if(!errors.isEmpty()) return res.status(400).json({status: 'error', data: errors.array()});
 
+        
         const {email, password} = req.body;
-
         try{
             // fetch user from DB
             const requestedUser = await User.findOne({email});
+            console.log(requestedUser)
             if(!requestedUser) return res.status(400).json({status: 'error', data: 'email or password are incorrect'});
         
             // validate user
