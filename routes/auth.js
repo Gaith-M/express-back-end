@@ -13,9 +13,7 @@ router.post('/sign-up', body('name').escape(), body('name').isAscii(), body('nam
     
         // Validate inputs
         const errors = validationResult(req);
-        if(!errors.isEmpty()){
-            return res.status(400).json({status: 'error', data: errors.array()})
-        }
+        if(!errors.isEmpty()) return res.status(400).json({status: 'error', data: errors.array()});
         
         try{
             const {name, email, password} = req.body;
@@ -46,9 +44,7 @@ router.post('/login', body('email').escape(), body('email').trim(), body('email'
 
         // Validate inputs
         const errors = validationResult(req);
-        if(!errors.isEmpty()){
-            return res.status(400).json({status: 'error', data: errors.array()})
-        }
+        if(!errors.isEmpty()) return res.status(400).json({status: 'error', data: errors.array()});
 
         const {email, password} = req.body;
 
