@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const PostSchema = mongoose.Schema({
-    publicID: Number,
+    publicID: String,
     title: String,
     body: String,
-    replys: Array,
+    authorId: mongoose.ObjectId
 });
 
 const PostModel = mongoose.model('Post', PostSchema);
