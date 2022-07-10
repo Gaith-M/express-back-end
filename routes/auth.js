@@ -6,9 +6,10 @@ const User = require('../models/User');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
-router.post('/sign-up', body('name').escape(), body('name').isAscii(), body('name').trim(), body('name').isLength({min: 2}),
-    body('email').escape(), body('email').trim(), body('email').isEmail(),
-    body('password').escape(), body('password').trim(), body('password').isLength({min:8}),
+router.post('/sign-up',
+    body('name').escape().isAscii().trim().isLength({min: 2}),
+    body('email').escape().trim().isEmail().normalizeEmail(),
+    body('password').escape().trim().isLength({min:8}),
     async (req, res) => {
     
         // Validate inputs
@@ -38,8 +39,9 @@ router.post('/sign-up', body('name').escape(), body('name').isAscii(), body('nam
         }
 });
 
-router.post('/login', body('email').escape(), body('email').trim(), body('email').isEmail(),
-    body('password').escape(), body('password').trim(), body('password').isLength({min:8}),
+router.post('/login', 
+    body('email').escape().trim().isEmail().normalizeEmail,
+    body('password').escape().trim().isLength({min:8}),
     async (req, res) => {
 
         // Validate inputs
