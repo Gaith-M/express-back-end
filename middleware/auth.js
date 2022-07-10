@@ -7,9 +7,9 @@ const auth = async (req, res, next) => {
     if(!token) return res.status(401).json({status: 'error', data: {name: 'unauthorized', message: 'user is unauthorized.'}});
 
     try{
-        const verified = jwt.verify(token, process.env.JWT_SECRET);
-
-        console.log(verified)
+        const data = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = data
+        
         next();
     }catch(err){
         res.status(401).json({status: 'error', data: err})

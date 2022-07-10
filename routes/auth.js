@@ -28,10 +28,10 @@ router.post('/sign-up',
             const newUser = await User.create({name, email, password: hashedPassword});
             
             // Create and send token
-            jwt.sign({name: newUser.name}, JWT_SECRET, (err, token) => {
+            jwt.sign({name: newUser.name, email: newUser.email}, JWT_SECRET, (err, token) => {
                 if(err) return res.status(500).json({status: 'error', data: err});
 
-                res.json({status: 'success', data: {token, user: {name: newUser.name, email: newUser.email}}})
+                res.json({status: 'success', data: {token, user: {name: newUser.name}}})
             });
         }
         catch(err){
@@ -54,7 +54,6 @@ router.post('/login',
         try{
             // fetch user from DB
             const requestedUser = await User.findOne({email});
-            console.log(requestedUser)
             if(!requestedUser) return res.status(400).json({status: 'error', data: 'email or password are incorrect'});
         
             // validate user
@@ -62,10 +61,10 @@ router.post('/login',
             if(!isValid) return res.status(400).json({status: 'error', data: 'email or password are incorrect'});
         
             // Create and send token
-            jwt.sign({name: requestedUser.name}, JWT_SECRET, (err, token) => {
+            jwt.sign({name: requestedUser.name, email: requestedUser.email}, JWT_SECRET, (err, token) => {
                 if(err) return res.status(500).json({status: 'error', data: err})
         
-                res.json({status: 'success', data: {token, user: {name: requestedUser.name, email: requestedUser.email}}})
+                res.json({status: 'success', data: {token, user: {name: requestedUser.name}}})
             })
 
         }catch(err){
