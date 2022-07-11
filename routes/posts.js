@@ -22,6 +22,17 @@ router.get('/', async (req, res) => {
 });
 
 
+// @desc: get all posts of a specific user
+router.get('/user/:id', async (req, res) => {
+    try{
+        const posts = await Post.find({authorId: req.params.id});
+        res.json({status: 'success', data: posts})
+    }catch(err){
+        res.status(500).json({status: 'error', data: err})
+    }
+})
+
+
 // @desc: Get single post by its id (publicID)
 router.get('/:id', async (req, res) => {
     try{

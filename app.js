@@ -26,3 +26,8 @@ app.use('/api/auth', require('./routes/auth'));
 // @Contains
 // get single - all - update - delete posts 
 app.use('/api/posts', require('./routes/posts'))
+
+// Handle all undefined endpoints
+app.use((req, res) => {
+    res.status(404).json({status: 'error', data: '--'})
+})
